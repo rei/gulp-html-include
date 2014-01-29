@@ -18,5 +18,10 @@
     "cache",
     "version"
   ],
-  "author": "Derek Peterson, REI"
+  "author": "Derek Peterson, REI",
+  "private": true,
+  "dependencies": {
+    "gulp-util": "~2.2.13",
+    "through2": "~0.4.1"
+  }
 }

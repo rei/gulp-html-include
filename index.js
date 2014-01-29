@@ -11,7 +11,7 @@ function _normalizePath ( input ) {
     var input = input || '/';
     var len = input.length;
     var end = input[ len - 1 ];
-    return input + end === '/' ? '' : '/';
+    return input + (end === '/' ? '' : '/');
 }
 
 module.exports = function ( includePath ) {

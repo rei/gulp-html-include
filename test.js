@@ -6,6 +6,23 @@ var include = require('./index');
 
 var JS_INCLUDE    = '<script src="include/path/javascript.js"></script>';
 var CSS_INCLUDE   = '<link href="include/path/style.css" rel="stylesheet" />';
+var JS_ROOT       = '<script src="/javascript.js"></script>';
+var CSS_ROOT      = '<link href="/style.css" rel="stylesheet" />';
+
+it('should default to the root directory', function ( cb ) {
+    var stream = include();
+
+    stream.on( 'data', function ( file ) {
+        assert.equal( file.path, 'javascript.js.html' );
+        assert.equal( file.contents, JS_ROOT );
+        cb();
+    });
+
+    stream.write( new gutil.File({
+        path: 'javascript.js',
+        contents: new Buffer('')
+    }));
+});
 
 it('should normalize paths', function ( cb ) {
     var stream = include('include/path');

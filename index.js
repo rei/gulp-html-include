@@ -7,9 +7,15 @@ var through     = require( 'through2' );
 var File        = gutil.File;
 var PluginError = gutil.PluginError;
 
+function _normalizePath ( input ) {
+    var input = input || '/';
+    var len = input.length;
+    var end = input[ len - 1 ];
+    return input + end === '/' ? '' : '/';
+}
+
 module.exports = function ( includePath ) {
-    var includePath = includePath || './';
-    includePath += includePath[ includePath.length - 1 ] === '/' ? '' : '/';
+    var includePath = _normalizePath( includePath );
 
     return through.obj(function ( file, enc, cb ) {
         if ( file.isNull() ) {

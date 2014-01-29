@@ -13,7 +13,7 @@ gulp.src( '/path/to/my/files' )
     .pipe( rename(function ( dir, base, ext ) {
         return path.join( dest, 'html', base.replace( /\-[^\.]+/, '' ) + ext );
     }))
-    .pipe( gulp.dest('/path/to/web/root') )
+    .pipe( gulp.dest( '/path/to/web/root' ) )
 ```
 
 You can optionally pass in the path to prefix these files with, e.g., `/static/` (the default is `/`).

@@ -18,10 +18,27 @@
     "cache",
     "version"
   ],
-  "author": "Derek Peterson, REI",
+  "author": {
+    "name": "Derek Peterson",
+    "company": "REI",
+    "email": "depeter@rei.com"
+  },
   "private": true,
   "dependencies": {
     "gulp-util": "~2.2.13",
-    "through2": "~0.4.1"
+    "through2": "~0.4.1",
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1"
+  },
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "mocha"
+  },
+  "engines": {
+    "node": ">=0.10.0"
   }
 }

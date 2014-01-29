@@ -1,8 +1,7 @@
 {
   "name": "gulp-include-generator",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "HTML include generator for static assets, e.g., foo.min.js => foo.min.js.html",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "http://git/scm/sand/gulp-include-generator.git"
@@ -32,6 +31,7 @@
   "devDependencies": {
     "mocha": "~1.17.1"
   },
+  "main": "index.js",
   "files": [
     "index.js"
   ],

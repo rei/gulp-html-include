@@ -43,9 +43,9 @@ module.exports = function ( includePath ) {
         });
 
         this.push(new File({
-            cwd:        file.cwd,
+            base:       file.base,
             contents:   new Buffer( includeContents ),
-            path:       path.join( file.base, htmlName )
+            path:       htmlName
         }));
 
         cb();

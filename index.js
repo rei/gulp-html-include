@@ -4,9 +4,6 @@ var path        = require( 'path' );
 var gutil       = require( 'gulp-util' );
 var through     = require( 'through2' );
 
-var File        = gutil.File;
-var PluginError = gutil.PluginError;
-
 function _normalizePath ( input ) {
     var input = input || '/';
     var len = input.length;
@@ -14,8 +11,15 @@ function _normalizePath ( input ) {
     return input + (end === '/' ? '' : '/');
 }
 
-module.exports = function ( includePath ) {
-    var includePath = _normalizePath( includePath );
+var PLUGIN_NAME = 'gulp-html-include';
+
+module.exports = function ( options ) {
+    var config = {
+        dest: './',
+        path: '/'
+    };
+    _.assign( config, options );
+    config.path = _normalizePath( config.path );
 
     return through.obj(function ( file, enc, cb ) {
         if ( file.isNull() ) {
@@ -24,8 +28,8 @@ module.exports = function ( includePath ) {
         }
 
         if ( file.isStream() ) {
-            throw new PluginError({
-                plugin: 'gulp-include-generator',
+            throw new gutil.PluginError({
+                plugin: PLUGIN_NAME,
                 message: 'Streaming not supported'
             });
             return cb();
@@ -34,18 +38,28 @@ module.exports = function ( includePath ) {
         var fileName = path.basename( file.path );
         var fileType = path.extname( fileName );
         var htmlName = fileName + '.html';
-        var template = fileType === '.js' ?
-                       '<script src="<%= path %>"></script>' :
-                       '<link href="<%= path %>" rel="stylesheet" />';
+        var template;
+
+        if ( fileType === '.js' ) {
+           template = '<script src="<%= path %>"></script>';
+        } else if ( fileType === '.css' ) {
+            template = '<link href="<%= path %>" rel="stylesheet" />';
+        } else {
+            throw new gutil.PluginError({
+                plugin: PLUGIN_NAME,
+                message: 'Input files must be JavaScript or CSS'
+            });
+            return cb();
+        }
 
         var includeContents = _.template( template, {
-            path: includePath + fileName
+            path: config.path + fileName
         });
 
-        this.push(new File({
-            base:       file.base,
+        this.push(new gutil.File({
+            base:       config.dest,
             contents:   new Buffer( includeContents ),
-            path:       htmlName
+            path:       path.join( config.dest, htmlName )
         }));
 
         cb();

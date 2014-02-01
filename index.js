@@ -56,11 +56,15 @@ module.exports = function ( options ) {
             path: config.path + fileName
         });
 
-        this.push(new gutil.File({
+        var htmlFile = new gutil.File({
             base:       config.dest,
             contents:   new Buffer( includeContents ),
             path:       path.join( config.dest, htmlName )
-        }));
+        });
+
+        this.push( htmlFile );
+
+        gutil.log( 'Generating file', htmlFile.path );
 
         cb();
     });

@@ -1,4 +1,4 @@
-# gulp-include-generator
+# gulp-html-include
 
 > HTML include generator for static assets, e.g., foo.min.js => foo.min.js.html
 
@@ -11,26 +11,26 @@ gulp.src( '/path/to/my/files' )
     .pipe( rev() )
     .pipe( include() )
     .pipe( rename(function ( dir, base, ext ) {
-        return path.join( dest, 'html', base.replace( /\-[^\.]+/, '' ) + ext );
+        return base.replace( /\-[^\.]+/, '' ) + ext;
     }))
     .pipe( gulp.dest( '/path/to/web/root' ) )
 ```
 
-You can optionally pass in the path to prefix these files with, e.g., `/static/` (the default is `/`).
+You can optionally pass in the path to prefix these files with (e.g., `/static/`) and the destination directory to set as the base for these files (e.g., `../../static/`). The default path prefix is `/`, and the default destination directory is `./`.
 
 ```
 gulp.src( '/path/to/my/files' )
     .pipe( rev() )
-    .pipe( include( '/static/' ) )
+    .pipe( include( { path: '/static/', dest: '../../static/' } ) )
     .pipe( rename(function ( dir, base, ext ) {
-        return path.join( dest, 'html', base.replace( /\-[^\.]+/, '' ) + ext );
+        return base.replace( /\-[^\.]+/, '' ) + ext;
     }))
-    .pipe( gulp.dest( '/path/to/web/root' ) )
+    .pipe( gulp.dest( '../../static' ) )
 ```
 
 ## Testing
 
-You can run the tests with Mocha by running `mocha` in the project directory. If you don't have Mocha installed, you'll want to do that first.
+You can run the tests with Mocha by running `mocha` in the project directory. If you don't have Mocha installed globally, you'll want to do that first.
 
 ```
 npm install -g mocha

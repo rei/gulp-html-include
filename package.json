@@ -25,13 +25,13 @@
     "email": "depeter@rei.com"
   },
   "dependencies": {
-    "gulp-util": "~2.2.13",
-    "through2": "~0.4.1",
-    "lodash": "~2.4.1"
+    "gulp-util": "~2.2",
+    "through2": "~0.4",
+    "lodash": "~2.4"
   },
   "devDependencies": {
     "mocha": "*",
-    "chai": "~1.9.0"
+    "chai": "~1.9"
   },
   "main": "index.js",
   "files": [

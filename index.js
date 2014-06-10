@@ -5,7 +5,7 @@ var gutil       = require( 'gulp-util' );
 var through     = require( 'through2' );
 
 function _normalizePath ( input ) {
-    var input = input || '/';
+    input = input || '/';
     var len = input.length;
     var end = input[ len - 1 ];
     return input + (end === '/' ? '' : '/');
@@ -32,7 +32,6 @@ module.exports = function ( options ) {
                 plugin: PLUGIN_NAME,
                 message: 'Streaming not supported'
             });
-            return cb();
         }
 
         var fileName = path.basename( file.path );
@@ -49,7 +48,6 @@ module.exports = function ( options ) {
                 plugin: PLUGIN_NAME,
                 message: 'Input files must be JavaScript or CSS'
             });
-            return cb();
         }
 
         var includeContents = _.template( template, {
@@ -66,6 +64,6 @@ module.exports = function ( options ) {
 
         gutil.log( 'Generating file', htmlFile.path );
 
-        cb();
+        return cb();
     });
 };

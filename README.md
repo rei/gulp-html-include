@@ -35,3 +35,7 @@ You can run the tests with Mocha by running `mocha` in the project directory. If
 ```
 npm install -g mocha
 ```
+
+## License
+
+MIT © 2014 Recreational Equipment Inc.

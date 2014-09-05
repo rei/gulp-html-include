@@ -1,4 +1,4 @@
-# gulp-html-include
+# gulp-html-include [![Build Status][travis-image]][travis-url]
 
 > HTML include generator for static assets, e.g., foo.min.js => foo.min.js.html
 
@@ -39,3 +39,6 @@ npm install -g mocha
 ## License
 
 MIT © 2014 Recreational Equipment Inc.
+
+[travis-url]: https://travis-ci.org/reidev/gulp-html-include
+[travis-image]: https://travis-ci.org/reidev/gulp-html-include.svg

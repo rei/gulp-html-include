@@ -43,11 +43,11 @@ module.exports = function ( options ) {
         if ( fileType === '.js' ) {
             template = '<script src="<%= path %>"></script>';
         } else if ( fileType === '.css' ) {
-           if ( config.xhtml ) {
-               template = '<link href="<%= path %>" rel="stylesheet" />';
-           } else {
-               template = '<link href="<%= path %>" rel="stylesheet">';
-           }
+            if ( config.xhtml ) {
+                template = '<link href="<%= path %>" rel="stylesheet" />';
+            } else {
+                template = '<link href="<%= path %>" rel="stylesheet">';
+            }
         } else {
             throw new gutil.PluginError({
                 plugin: PLUGIN_NAME,

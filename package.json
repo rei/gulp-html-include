@@ -24,12 +24,12 @@
     "email": "depeter@rei.com"
   },
   "dependencies": {
-    "gulp-util": "~2.2",
-    "through2": "~0.4",
+    "gulp-util": "~3.0",
+    "through2": "~0.6",
     "lodash": "~2.4"
   },
   "devDependencies": {
-    "mocha": "*",
+    "mocha": "~1.21",
     "chai": "~1.9"
   },
   "main": "index.js",

@@ -28,6 +28,19 @@ gulp.src( '/path/to/my/files' )
     .pipe( gulp.dest( '../../static' ) )
 ```
 
+By default this plugin does not use self-closing tags for the `link` reference. You can enable XHTML-compliant output by setting the `xhtml` option to `true`.
+
+```
+gulp.src( '/path/to/my/files' )
+    .pipe( rev() )
+    .pipe( include( { xhtml: true } ) )
+    .pipe( rename(function ( dir, base, ext ) {
+        return base.replace( /\-[^\.]+/, '' ) + ext;
+    }))
+    .pipe( gulp.dest( '/path/to/web/root' ) )
+```
+
+
 ## Testing
 
 You can run the tests with Mocha by running `mocha` in the project directory. If you don't have Mocha installed globally, you'll want to do that first.

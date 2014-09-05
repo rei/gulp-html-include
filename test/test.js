@@ -6,9 +6,11 @@ var include     = require( '../index' );
 var path        = require( 'path' );
 
 var JS_INCLUDE          = '<script src="include/path/javascript.js"></script>';
-var CSS_INCLUDE         = '<link href="include/path/style.css" rel="stylesheet" />';
+var CSS_INCLUDE         = '<link href="include/path/style.css" rel="stylesheet">';
+var CSS_INCLUDE_XHTML   = '<link href="include/path/style.css" rel="stylesheet" />';
 var JS_ROOT             = '<script src="/javascript.js"></script>';
-var CSS_ROOT            = '<link href="/style.css" rel="stylesheet" />';
+var CSS_ROOT            = '<link href="/style.css" rel="stylesheet">';
+var CSS_ROOT_XHTML      = '<link href="/style.css" rel="stylesheet" />';
 var DEFAULT_JS_DEST     = 'javascript.js.html';
 var DEFAULT_CSS_DEST    = 'style.css.html';
 
@@ -45,6 +47,21 @@ describe('File Generation', function () {
         stream.on( 'data', function ( file ) {
             assert.equal( file.path, DEFAULT_CSS_DEST );
             assert.equal( file.contents, CSS_INCLUDE );
+            done();
+        });
+
+        stream.write( new gutil.File({
+            path: 'style.css',
+            contents: new Buffer('')
+        }));
+    });
+
+    it('should generate XHTML-compliant files to include CSS files', function ( done ) {
+        var stream = include({ path: 'include/path', xhtml: true });
+
+        stream.on( 'data', function ( file ) {
+            assert.equal( file.path, DEFAULT_CSS_DEST );
+            assert.equal( file.contents, CSS_INCLUDE_XHTML );
             done();
         });
 

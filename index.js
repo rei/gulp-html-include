@@ -16,7 +16,8 @@ var PLUGIN_NAME = 'gulp-html-include';
 module.exports = function ( options ) {
     var config = {
         dest: './',
-        path: '/'
+        path: '/',
+        xhtml: false
     };
     _.assign( config, options );
     config.path = _normalizePath( config.path );
@@ -40,9 +41,13 @@ module.exports = function ( options ) {
         var template;
 
         if ( fileType === '.js' ) {
-           template = '<script src="<%= path %>"></script>';
+            template = '<script src="<%= path %>"></script>';
         } else if ( fileType === '.css' ) {
-            template = '<link href="<%= path %>" rel="stylesheet" />';
+            if ( config.xhtml ) {
+                template = '<link href="<%= path %>" rel="stylesheet" />';
+            } else {
+                template = '<link href="<%= path %>" rel="stylesheet">';
+            }
         } else {
             throw new gutil.PluginError({
                 plugin: PLUGIN_NAME,

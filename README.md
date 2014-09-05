@@ -6,7 +6,7 @@
 
 This plugin generates an HTML file with solely a `script` or `link` reference to JS or CSS files passed to it, respectively. It pairs well with gulp-rev and gulp-rename to make it easy to include dynamically named static files (e.g., via JSP `include`). Now you can enjoy versioned files without having to manually update the references to your generated files.
 
-```
+```js
 gulp.src( '/path/to/my/files' )
     .pipe( rev() )
     .pipe( include() )
@@ -18,7 +18,7 @@ gulp.src( '/path/to/my/files' )
 
 You can optionally pass in the path to prefix these files with (e.g., `/static/`) and the destination directory to set as the base for these files (e.g., `../../static/`). The default path prefix is `/`, and the default destination directory is `./`.
 
-```
+```js
 gulp.src( '/path/to/my/files' )
     .pipe( rev() )
     .pipe( include( { path: '/static/', dest: '../../static/' } ) )
@@ -30,7 +30,7 @@ gulp.src( '/path/to/my/files' )
 
 By default this plugin does not use self-closing tags for the `link` reference. You can enable XHTML-compliant output by setting the `xhtml` option to `true`.
 
-```
+```js
 gulp.src( '/path/to/my/files' )
     .pipe( rev() )
     .pipe( include( { xhtml: true } ) )
@@ -45,7 +45,7 @@ gulp.src( '/path/to/my/files' )
 
 You can run the tests with Mocha by running `mocha` in the project directory. If you don't have Mocha installed globally, you'll want to do that first.
 
-```
+```js
 npm install -g mocha
 ```
 

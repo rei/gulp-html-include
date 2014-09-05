@@ -13,7 +13,7 @@ dynamically named static files (e.g., via
 enjoy versioned files without having to manually update the references to your
 generated files.
 
-```
+```js
 gulp.src( '/path/to/my/files' )
     .pipe( rev() )
     .pipe( include() )
@@ -28,7 +28,7 @@ You can optionally pass in the path to prefix these files with (e.g.,
 (e.g., `../../static/`). The default path prefix is `/`, and the default
 destination directory is `./`.
 
-```
+```js
 gulp.src( '/path/to/my/files' )
     .pipe( rev() )
     .pipe( include( { path: '/static/', dest: '../../static/' } ) )

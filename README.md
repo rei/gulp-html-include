@@ -1,4 +1,4 @@
-# gulp-html-include
+# gulp-html-include [![Build Status][travis-image]][travis-url]
 
 > HTML include generator for static assets, e.g., foo.min.js => foo.min.js.html
 
@@ -38,6 +38,19 @@ gulp.src( '/path/to/my/files' )
     .pipe( gulp.dest( '../../static' ) )
 ```
 
+By default this plugin does not use self-closing tags for the `link` reference. You can enable XHTML-compliant output by setting the `xhtml` option to `true`.
+
+```js
+gulp.src( '/path/to/my/files' )
+    .pipe( rev() )
+    .pipe( include( { xhtml: true } ) )
+    .pipe( rename(function ( dir, base, ext ) {
+        return base.replace( /\-[^\.]+/, '' ) + ext;
+    }))
+    .pipe( gulp.dest( '/path/to/web/root' ) )
+```
+
+
 ## Testing
 
 You can run the tests with [Mocha](http://visionmedia.github.io/mocha/) by
@@ -51,3 +64,6 @@ npm install -g mocha
 ## License
 
 MIT © 2014 Recreational Equipment Inc.
+
+[travis-url]: https://travis-ci.org/reidev/gulp-html-include
+[travis-image]: https://travis-ci.org/reidev/gulp-html-include.svg

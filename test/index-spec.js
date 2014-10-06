@@ -1,6 +1,7 @@
 'use strict';
 
 var assert      = require( 'assert' );
+var expect      = require( 'chai' ).expect;
 var gutil       = require( 'gulp-util' );
 var include     = require( '../index' );
 var path        = require( 'path' );
@@ -30,14 +31,14 @@ describe('File Generation', function () {
         var stream = include({ path: 'include/path' });
 
         stream.on( 'data', function ( file ) {
-            assert.equal( file.path, DEFAULT_JS_DEST );
-            assert.equal( file.contents, JS_INCLUDE );
+            expect( file.path ).to.equal( DEFAULT_JS_DEST );
+            expect( file.contents.toString() ).to.equal( JS_INCLUDE );
             done();
         });
 
         stream.write( new gutil.File({
             path: 'javascript.js',
-            contents: new Buffer('')
+            contents: new Buffer( '' )
         }));
     });
 
@@ -45,14 +46,14 @@ describe('File Generation', function () {
         var stream = include({ path: 'include/path' });
 
         stream.on( 'data', function ( file ) {
-            assert.equal( file.path, DEFAULT_CSS_DEST );
-            assert.equal( file.contents, CSS_INCLUDE );
+            expect( file.path ).to.equal( DEFAULT_CSS_DEST );
+            expect( file.contents.toString() ).to.equal( CSS_INCLUDE );
             done();
         });
 
         stream.write( new gutil.File({
             path: 'style.css',
-            contents: new Buffer('')
+            contents: new Buffer( '' )
         }));
     });
 
@@ -60,14 +61,14 @@ describe('File Generation', function () {
         var stream = include({ path: 'include/path', xhtml: true });
 
         stream.on( 'data', function ( file ) {
-            assert.equal( file.path, DEFAULT_CSS_DEST );
-            assert.equal( file.contents, CSS_INCLUDE_XHTML );
+            expect( file.path ).to.equal( DEFAULT_CSS_DEST );
+            expect( file.contents.toString() ).to.equal( CSS_INCLUDE_XHTML );
             done();
         });
 
         stream.write( new gutil.File({
             path: 'style.css',
-            contents: new Buffer('')
+            contents: new Buffer( '' )
         }));
     });
 
@@ -79,13 +80,13 @@ describe('Include Pathing', function () {
         var stream = include();
 
         stream.on( 'data', function ( file ) {
-            assert.equal( file.contents, JS_ROOT );
+            expect( file.contents.toString() ).to.equal( JS_ROOT );
             done();
         });
 
         stream.write( new gutil.File({
             path: 'javascript.js',
-            contents: new Buffer('')
+            contents: new Buffer( '' )
         }));
     });
 
@@ -93,14 +94,14 @@ describe('Include Pathing', function () {
         var stream = include({ path: 'include/path' });
 
         stream.on( 'data', function ( file ) {
-            assert.equal( file.path, DEFAULT_JS_DEST );
-            assert.equal( file.contents, JS_INCLUDE );
+            expect( file.path ).to.equal( DEFAULT_JS_DEST );
+            expect( file.contents.toString() ).to.equal( JS_INCLUDE );
             done();
         });
 
         stream.write( new gutil.File({
             path: 'javascript.js',
-            contents: new Buffer('')
+            contents: new Buffer( '' )
         }));
     });
 
@@ -112,13 +113,13 @@ describe('Output Destinations', function () {
         var stream = include();
 
         stream.on( 'data', function ( file ) {
-            assert.equal( file.path, DEFAULT_JS_DEST );
+            expect( file.path ).to.equal( DEFAULT_JS_DEST );
             done();
         });
 
         stream.write( new gutil.File({
             path: 'javascript.js',
-            contents: new Buffer('')
+            contents: new Buffer( '' )
         }));
     });
 
@@ -126,13 +127,13 @@ describe('Output Destinations', function () {
         var stream = include({ dest: '../static/'});
 
         stream.on( 'data', function ( file ) {
-            assert.equal( file.path, path.normalize( '../static/javascript.js.html' ));
+            expect( file.path ).to.equal( path.normalize( '../static/javascript.js.html' ));
             done();
         });
 
         stream.write( new gutil.File({
             path: 'javascript.js',
-            contents: new Buffer('')
+            contents: new Buffer( '' )
         }));
     });
 

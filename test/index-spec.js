@@ -1,6 +1,5 @@
 'use strict';
 
-var assert      = require( 'assert' );
 var expect      = require( 'chai' ).expect;
 var gutil       = require( 'gulp-util' );
 var include     = require( '../index' );

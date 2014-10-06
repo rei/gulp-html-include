@@ -5,6 +5,8 @@ var gutil       = require( 'gulp-util' );
 var include     = require( '../index' );
 var path        = require( 'path' );
 
+var through     = require( 'through2' );
+
 var JS_INCLUDE          = '<script src="include/path/javascript.js"></script>';
 var CSS_INCLUDE         = '<link href="include/path/style.css" rel="stylesheet">';
 var CSS_INCLUDE_XHTML   = '<link href="include/path/style.css" rel="stylesheet" />';
@@ -69,6 +71,46 @@ describe('File Generation', function () {
             path: 'style.css',
             contents: new Buffer( '' )
         }));
+    });
+
+    it('should pass through `null` files', function ( done ) {
+        var stream = include();
+
+        stream.on( 'data', function ( file ) {
+            expect( file.contents ).to.equal( null );
+            done();
+        });
+
+        stream.write( new gutil.File({
+            path: 'style.css',
+            contents: null
+        }));
+    });
+
+    it('should throw an error when it sees a stream', function () {
+        var stream = include();
+
+        function useStream () {
+            stream.write( new gutil.File({
+                path: 'blah.css',
+                contents: through()
+            }));
+        }
+
+        expect( useStream ).to.throw();
+    });
+
+    it('should thrown an error when it sees a non-JS or CSS file', function () {
+        var stream = include();
+
+        function invalidFile () {
+            stream.write( new gutil.File({
+                path: 'image.jpg',
+                contents: new Buffer( '' )
+            }));
+        }
+
+        expect( invalidFile ).to.throw();
     });
 
 });

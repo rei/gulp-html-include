@@ -5,7 +5,6 @@ var gutil       = require( 'gulp-util' );
 var through     = require( 'through2' );
 
 function _normalizePath ( input ) {
-    input = input || '/';
     var len = input.length;
     var end = input[ len - 1 ];
     return input + (end === '/' ? '' : '/');

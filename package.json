@@ -34,9 +34,6 @@
     "chai": "~1.9"
   },
   "main": "index.js",
-  "files": [
-    "index.js"
-  ],
   "scripts": {
     "test": "mocha"
   },

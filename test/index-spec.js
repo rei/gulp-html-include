@@ -1,6 +1,5 @@
 'use strict';
 
-var assert      = require( 'assert' );
 var expect      = require( 'chai' ).expect;
 var gutil       = require( 'gulp-util' );
 var include     = require( '../index' );
@@ -86,6 +85,34 @@ describe('Include Pathing', function () {
 
         stream.write( new gutil.File({
             path: 'javascript.js',
+            contents: new Buffer( '' )
+        }));
+    });
+
+    it('should default the path to the root directory for CSS files', function ( done ) {
+        var stream = include();
+
+        stream.on( 'data', function ( file ) {
+            expect( file.contents.toString() ).to.equal( CSS_ROOT );
+            done();
+        });
+
+        stream.write( new gutil.File({
+            path: 'style.css',
+            contents: new Buffer( '' )
+        }));
+    });
+
+    it('should default the path to the root directory for XHTML-targeted CSS files', function ( done ) {
+        var stream = include({ xhtml: true });
+
+        stream.on( 'data', function ( file ) {
+            expect( file.contents.toString() ).to.equal( CSS_ROOT_XHTML );
+            done();
+        });
+
+        stream.write( new gutil.File({
+            path: 'style.css',
             contents: new Buffer( '' )
         }));
     });

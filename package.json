@@ -1,6 +1,6 @@
 {
   "name": "gulp-html-include",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "HTML include generator for static assets, e.g., foo.min.js => foo.min.js.html",
   "repository": {

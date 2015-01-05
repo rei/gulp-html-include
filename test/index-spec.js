@@ -16,14 +16,14 @@ var CSS_ROOT_XHTML      = '<link href="/style.css" rel="stylesheet" />';
 var DEFAULT_JS_DEST     = 'javascript.js.html';
 var DEFAULT_CSS_DEST    = 'style.css.html';
 
-var out = process.stdout.write;
+var out = gutil.log;
 
 beforeEach(function () {
-    process.stdout.write = function () {};
+    gutil.log = function () {};
 });
 
 afterEach(function () {
-    process.stdout.write = out;
+    gutil.log = out;
 });
 
 describe('File Generation', function () {
@@ -100,17 +100,18 @@ describe('File Generation', function () {
         expect( useStream ).to.throw();
     });
 
-    it('should thrown an error when it sees a non-JS or CSS file', function () {
+    it('should pass through files that are not JS or CSS', function ( done ) {
         var stream = include();
 
-        function invalidFile () {
-            stream.write( new gutil.File({
-                path: 'image.jpg',
-                contents: new Buffer( '' )
-            }));
-        }
+        stream.on( 'data', function ( file ) {
+            expect( file.path ).to.equal( 'image.jpg' );
+            done();
+        });
 
-        expect( invalidFile ).to.throw();
+        stream.write( new gutil.File({
+            path: 'image.jpg',
+            contents: new Buffer( '' )
+        }));
     });
 
 });

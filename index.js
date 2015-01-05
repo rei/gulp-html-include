@@ -48,10 +48,8 @@ module.exports = function ( options ) {
                 template = '<link href="<%= path %>" rel="stylesheet">';
             }
         } else {
-            throw new gutil.PluginError({
-                plugin: PLUGIN_NAME,
-                message: 'Input files must be JavaScript or CSS'
-            });
+            this.push( file );
+            return cb();
         }
 
         var includeContents = _.template( template, {

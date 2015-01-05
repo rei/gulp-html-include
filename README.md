@@ -54,12 +54,7 @@ gulp.src( '/path/to/my/files' )
 ## Testing
 
 You can run the tests with [Mocha](http://visionmedia.github.io/mocha/) by
-running `mocha` in the project directory. If you don't have Mocha installed
-globally, you'll want to do that first.
-
-```
-npm install -g mocha
-```
+running `npm run test` in the project directory.
 
 ## License
 

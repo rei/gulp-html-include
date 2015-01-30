@@ -52,7 +52,7 @@ module.exports = function ( options ) {
             return cb();
         }
 
-        var includeContents = _.template( template, {
+        var includeContents = _.template( template )({
             path: config.path + fileName
         });
 

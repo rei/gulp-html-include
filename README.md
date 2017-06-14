@@ -53,7 +53,7 @@ gulp.src( '/path/to/my/files' )
 
 ## Testing
 
-You can run the tests with [Mocha](http://visionmedia.github.io/mocha/) by
+You can run the tests with [Mocha](http://mochajs.org/) by
 running `npm run test` in the project directory.
 
 ## License

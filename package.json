@@ -1,6 +1,6 @@
 {
   "name": "@rei/gulp-html-include",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "HTML include generator for static assets, e.g., foo.min.js => foo.min.js.html",
   "repository": {
@@ -25,19 +25,18 @@
     "email": "depeter@rei.com"
   },
   "dependencies": {
-    "gulp-util": "~3.0",
-    "lodash": "^3.0.0",
-    "through2": "~0.6"
+    "gulp-util": "^3.0.0",
+    "through2": "^3.0.1"
   },
   "devDependencies": {
-    "mocha": "~1.21",
-    "chai": "~1.9"
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "mocha"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.0.0"
   }
 }

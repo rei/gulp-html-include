@@ -58,7 +58,7 @@ running `npm run test` in the project directory.
 
 ## License
 
-MIT © 2014 Recreational Equipment Inc.
+MIT © 2019 Recreational Equipment Inc.
 
 [travis-url]: https://travis-ci.org/reidev/gulp-html-include
 [travis-image]: https://travis-ci.org/reidev/gulp-html-include.svg

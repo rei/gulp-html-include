@@ -17,10 +17,10 @@ module.exports = function (options) {
     xhtml: false
   };
   const merged = Object.assign(config, options);
-
   const mergedWithNormalizedPath = Object.assign(merged, {
     path: _normalizePath(merged.path),
   });
+  mergedWithNormalizedPath.passThroughAttributes = mergedWithNormalizedPath.passThroughAttributes || {};
 
   return through.obj(function (file, enc, cb) {
     if (file.isNull()) {
@@ -40,14 +40,18 @@ module.exports = function (options) {
     const htmlName = fileName + '.html';
     let includeContents;
     const normalizedPath = path.join(mergedWithNormalizedPath.path, fileName);
+    const passThroughAttributes = Object
+        .keys(mergedWithNormalizedPath.passThroughAttributes)
+        .map(attr => `${attr}="${options.passThroughAttributes[attr]}"`)
+        .join(' ');
 
     if (fileType === '.js') {
-      includeContents = `<script src="${normalizedPath}"></script>`;
+      includeContents = `<script src="${normalizedPath}" ${passThroughAttributes}></script>`;
     } else if (fileType === '.css') {
       if (mergedWithNormalizedPath.xhtml) {
-        includeContents = `<link href="${normalizedPath}" rel="stylesheet" />`;
+        includeContents = `<link href="${normalizedPath}" rel="stylesheet" ${passThroughAttributes}/>`;
       } else {
-        includeContents = `<link href="${normalizedPath}" rel="stylesheet">`;
+        includeContents = `<link href="${normalizedPath}" rel="stylesheet" ${passThroughAttributes}>`;
       }
     } else {
       this.push(file);

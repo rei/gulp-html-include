@@ -7,14 +7,18 @@ var path = require('path');
 
 var through = require('through2');
 
-var JS_INCLUDE = '<script src="include/path/javascript.js"></script>';
-var CSS_INCLUDE = '<link href="include/path/style.css" rel="stylesheet">';
+var JS_INCLUDE = '<script src="include/path/javascript.js" ></script>';
+var CSS_INCLUDE = '<link href="include/path/style.css" rel="stylesheet" >';
 var CSS_INCLUDE_XHTML = '<link href="include/path/style.css" rel="stylesheet" />';
-var JS_ROOT = '<script src="/javascript.js"></script>';
-var CSS_ROOT = '<link href="/style.css" rel="stylesheet">';
+var JS_ROOT = '<script src="/javascript.js" ></script>';
+var CSS_ROOT = '<link href="/style.css" rel="stylesheet" >';
 var CSS_ROOT_XHTML = '<link href="/style.css" rel="stylesheet" />';
 var DEFAULT_JS_DEST = 'javascript.js.html';
 var DEFAULT_CSS_DEST = 'style.css.html';
+var LITERAL_ATTRIBUTES = {'back to school': 1986};
+var JS_ROOT_WITH_LITERAL_ATTRIBUTES = '<script src="/javascript.js" back to school="1986"></script>';
+var CSS_ROOT_WITH_LITERAL_ATTRIBUTES = '<link href="/style.css" rel="stylesheet" back to school="1986">';
+var CSS_ROOT_XHTML_WITH_LITERAL_ATTRIBUTES = '<link href="/style.css" rel="stylesheet" back to school="1986"/>';
 
 var out = gutil.log;
 
@@ -208,4 +212,49 @@ describe('Output Destinations', function () {
     }));
   });
 
+});
+
+describe('Literal attributes', function () {
+
+  it('should pass literal attributes to js tags', function (done) {
+    var stream = include({passThroughAttributes: LITERAL_ATTRIBUTES});
+
+    stream.on('data', function (file) {
+      expect(file.contents.toString()).to.equal(JS_ROOT_WITH_LITERAL_ATTRIBUTES);
+      done();
+    });
+
+    stream.write(new gutil.File({
+      path: 'javascript.js',
+      contents: Buffer.from('')
+    }));
+  });
+
+  it('should pass literal attributes to style tags', function (done) {
+    var stream = include({passThroughAttributes: LITERAL_ATTRIBUTES});
+
+    stream.on('data', function (file) {
+      expect(file.contents.toString()).to.equal(CSS_ROOT_WITH_LITERAL_ATTRIBUTES);
+      done();
+    });
+
+    stream.write(new gutil.File({
+      path: 'style.css',
+      contents: Buffer.from('')
+    }));
+  });
+
+  it('should pass literal attributes to xhtml style tags', function (done) {
+    var stream = include({passThroughAttributes: LITERAL_ATTRIBUTES, xhtml: true});
+
+    stream.on('data', function (file) {
+      expect(file.contents.toString()).to.equal(CSS_ROOT_XHTML_WITH_LITERAL_ATTRIBUTES);
+      done();
+    });
+
+    stream.write(new gutil.File({
+      path: 'style.css',
+      contents: Buffer.from('')
+    }));
+  });
 });
